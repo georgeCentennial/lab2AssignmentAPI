@@ -10,11 +10,11 @@ import contactRoutes from './routes/contact.routes.js'
 
 const app = express()
 
-app.get('/', (req, res) => 
-    {
-        res.status(200).send(Template()) 
-    }
-)
+// app.get('/', (req, res) => 
+//     {
+//         res.status(200).send(Template()) 
+//     }
+// )
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
