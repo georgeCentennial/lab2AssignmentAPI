@@ -72,6 +72,25 @@ const remove = async (req, res) => {
     }
 }
 
+const removeMany = async (req, res) => {
+    const { ids } = req.body; // Assuming IDs are sent in the request body
+    if (!Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({
+            error: "Please provide an array of IDs to delete."
+        });
+    }
+    try {
+        const result = await Contact.deleteMany({ _id: { $in: ids } });
+        return res.status(200).json({
+            message: `${result.deletedCount} contacts successfully deleted!`
+        });
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
+    }
+};
+
 
 export default {
     create,
@@ -79,5 +98,6 @@ export default {
     list,
     remove,
     update,
-    read
+    read,
+    removeMany
 }

@@ -79,24 +79,24 @@ const remove = async (req, res) => {
     }
 }
 
-const userByName = async (_name) => {
-    try {
-        console.log(_name)
-        // let user = await User.findById("67a4058fe565447f55ea378d")
-        // if (!user)
-        //     return res.status('400').json({
-        //         error: "User Name not found"
-        //     })
-        //req.profile = user
-        //next()
-    } catch (err) {
-        // return res.status('400').json({
-        //     error: "Could not retrieve user name"
-        // })
-        console.log("Could not retrieve user name");
-        //console.log(err);
+const removeMany = async (req, res) => {
+    const { ids } = req.body; // Assuming IDs are sent in the request body
+    if (!Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({
+            error: "Please provide an array of IDs to delete."
+        });
     }
-}
+    try {
+        const result = await User.deleteMany({ _id: { $in: ids } });
+        return res.status(200).json({
+            message: `${result.deletedCount} users successfully deleted!`
+        });
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
+    }
+};
 
 export default {
     create,
@@ -105,5 +105,5 @@ export default {
     list,
     remove,
     update,
-    userByName
+    removeMany
 }
