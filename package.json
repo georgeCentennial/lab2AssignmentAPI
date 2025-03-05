@@ -1,6 +1,10 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
+  "engines": {
+    "npm": "11.0.0",
+    "node": "v22.13.0"
+  },
   "type": "module",
   "description": "",
   "homepage": "https://github.com/georgeCentennial/webAppPortfolio#readme",
