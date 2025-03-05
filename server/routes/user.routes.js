@@ -10,7 +10,5 @@ router.route('/api/users/:userId').get(userCtrl.read)
 router.route('/api/users/:userId').put(userCtrl.update)
 router.route('/api/users/:userId').delete(userCtrl.remove)
 
-router.param('name', userCtrl.userByName)
-router.route('/api/users/name/:name').get(userCtrl.read)
 
 export default router
